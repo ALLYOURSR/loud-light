@@ -7,10 +7,10 @@ Powering lights with an Arduino, even making them flash, is trivial. Making them
 1. Amplitude correction: music is dynamic. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! The solution?
 
 # Hardware
-Arduino Uno: This part isn’t terribly important, this code should work just fine with any Arduino variant/clone
-Electret Microphone Amplifier: these somewhat crappy but rather nifty microphones come with adjustable gain and attack/release ratios. I think after playing around I settled on the default values.
-Power Transistor: I used a TIP122 NPN darlington transistor. Probably overkill at 65 watt capacity, but cheap and available.
-12V power both the Arduino and the lights. I made my own splitter.
+* Arduino Uno: This part isn’t terribly important, this code should work just fine with any Arduino variant/clone
+* Electret Microphone Amplifier: these somewhat crappy but rather nifty microphones come with adjustable gain and attack/release ratios. I think after playing around I settled on the default values.
+* Power Transistor: I used a TIP122 NPN darlington transistor. Probably overkill at 65 watt capacity, but cheap and available.
+* 12V power both the Arduino and the lights. I made my own nifty splitter so that I could use a single power supply.
 
 # Implementation Details
 Making the lights flash pleasantly and responsively required a number of 
