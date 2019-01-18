@@ -25,7 +25,7 @@ The result works quite well with the parameters in the code!
 
 # Hardware
 ![alt text](docs/hardware.png)
-![alt text](pro_schematic.png)
+![alt text](docs/pro_schematic.png)
 * Arduino Uno: This part isn’t terribly important, this code should work just fine with any Arduino variant/clone
 * Electret Microphone Amplifier: these somewhat crappy but rather nifty microphones come with adjustable gain and attack/release ratios. I think after playing around I settled on the default values.
 * Power Transistor: I used a TIP122 NPN darlington transistor. Probably overkill at 65 watt capacity, but cheap and available.
