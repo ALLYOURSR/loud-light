@@ -12,7 +12,7 @@ A naïve implementation (ask me how I know), adjusting pulse width linearly with
 
 ```c++
 float correction(float rawValue)
-{//nonlinearly remaps [0, 100] to a function on [0,255] to correct 
+{//nonlinearly maps [0, 100] to a function on [0,255] to correct 
  //for perception of brightness and output PWM units (0-255, byte)
 	return exp(.055452*rawValue) - 1;
 }
