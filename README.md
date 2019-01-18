@@ -6,6 +6,8 @@ Turn any boring old party into a fantastic light show! You’ll be the talk of t
 Powering lights with an Arduino, even making them flash, is trivial. Making them flash in real time, responsively, to music of varying tempo and volume, pleasantly, is not! Two main problems had to be solved:
 1. Amplitude correction: music is dynamic. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! The solution?
 
+2. Output Brightness Correction: A naïve implementation (ask me how I know), converting corrected microphone voltage proportionally to PWM width, creates a very narrow dynamic light intensity range. In plainer English, without a necessary correction, directly coupling sound intensity to LED brightness makes for lights that seem to flash on and off with very little dimming in between. I speculate that the human eye perceives light intensity logarithmically, much in the same way that human ear response is best measured on the logarithmic decibel scale. The solution: map the linear microphone voltage input to an inverse logarithmic function to linearize perception of LED brightness. The result works quite well with the parameters in the code!
+
 # Hardware
 ![alt text](docs/hardware.png)
 ![alt text](pro_schematic.png)
