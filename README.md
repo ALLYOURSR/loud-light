@@ -3,11 +3,12 @@ An Arduino powered pulse width modulation (PWM) light controller, for making lig
 Turn any boring old party into a fantastic light show! You’ll be the talk of the neighborhood! Tested on LEDs and 12" cold cathode lamps, the latter of which produce a very interesting effect when hacked to work at less than 100% power.
 
 # Secret Formula
-Powering lights with an Arduino, even making them flash, is trivial. Making them flash in real time, responsively, to music of varying tempo and volume, pleasantly, is not! Two main problems had to be solved:
-1. Amplitude correction: music volume is dynamic. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! The solution?
+Powering lights with an Arduino, even making them flash, is trivial. Making them flash in real time, responsively, to music of varying tempo and volume, pleasantly, is not! Two main problems had to be solved.
 
-2. Output Brightness Correction: 
+### Amplitude correction
+Music volume is dynamic. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! The solution?
 
+### Output Brightness Correction
 A naïve implementation (ask me how I know), adjusting pulse width linearly with mic voltage, causes lights to appear only to flash on and off, with very little range in between. I speculate that the human eye perceives light intensity logarithmically, much in the same way that human hearing is best measured on the logarithmic decibel scale. The solution: map the linear microphone voltage input to an inverse logarithmic function to linearize perception of LED brightness. Here's the relevent code from math_.cpp:
 
 ```c++
