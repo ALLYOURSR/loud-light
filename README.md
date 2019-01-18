@@ -12,15 +12,14 @@ A naïve implementation (ask me how I know), adjusting pulse width linearly with
 
 ```c++
 float correction(float rawValue)
-{
-	//remaps 0-100 to a function on 0-255 to correct for perception of brightness
+{//nonlinearly remaps [0, 100] to a function on [0,255] to correct for perception of brightness and output PWM units (0-255, byte)
 	return exp(.055452*rawValue) - 1;
-}```
+}
+```
 
 The result works quite well with the parameters in the code!
 
 
-English, without a necessary correction, directly coupling sound intensity to LED brightness makes for lights that seem to flash on and off with very little dimming in between. 
 
 # Hardware
 ![alt text](docs/hardware.png)
