@@ -10,12 +10,12 @@ Powering lights with an Arduino, even making them flash, is trivial. Making them
 
 A naïve implementation (ask me how I know), adjusting pulse width linearly with mic voltage, causes lights to appear only to flash on and off, with very little range in between. I speculate that the human eye perceives light intensity logarithmically, much in the same way that human hearing is best measured on the logarithmic decibel scale. The solution: map the linear microphone voltage input to an inverse logarithmic function to linearize perception of LED brightness. Here's the relevent code from math_.cpp:
 
-'''c++
+```c++
 float correction(float rawValue)
 {
 	//remaps 0-100 to a function on 0-255 to correct for perception of brightness
 	return exp(.055452*rawValue) - 1;
-}'''
+}```
 
 The result works quite well with the parameters in the code!
 
