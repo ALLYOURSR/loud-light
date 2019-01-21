@@ -6,7 +6,9 @@
 
 float correction(float rawValue)
 {
-	//remaps 0-100 to a function on 0-255 to correct for perception of brightness
+	//remaps 0-100 to a function on 0-255
+	//[0,255] corresponds to valid DigitalWrite PWM duty cycle value range
+	//The function is exponential to correct for human brightness perception
 	return exp(.055452*rawValue) - 1;
 
 }
@@ -21,34 +23,6 @@ float getAverage(float* arr, int len)
 	}
 	//print(arr[6],0);
 	return sum / len;
-}
-
-float sample(int pin, int duration)
-{
-	//I'm pretty sure this blocks for int duration every time it works....heh
-	//Need multithreading - looks fine to the human eye though. Just be careful with larger values
-	//or the light could start to lag. Idea: implement delay?
-	int startMillis = millis();
-	unsigned int signalMax = 0;
-	unsigned int signalMin = 1024;
-
-	// collect data for 50 mS
-	while (millis() - startMillis < duration)
-	{
-		int val = analogRead(0);
-		if (val < 1024)  // toss out spurious readings
-		{
-			if (val > signalMax)
-			{
-				signalMax = val;  // save just the max levels
-			}
-			else if (val < signalMin)
-			{
-				signalMin = val;  // save just the min levels
-			}
-		}
-	}
-
 }
 
 float readMicAmplitude(int pin)
@@ -94,8 +68,11 @@ void writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float 
 	//max brightness should be reduced to keep within range.
 	//A value of 40 for max brightness seems to work remarkably well for 12" lamps 
 	
-	float out = correction(mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness));
+	float normed = mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness);
 	
+
+	float out = correction(normed);
+
 	analogWrite(pin, out);
 
 }

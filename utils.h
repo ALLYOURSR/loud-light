@@ -2,6 +2,7 @@
 //Just some helpful stuff
 
 #define PRINT_BUFFER_LENGTH 4
+#define SMOOTHER_LENGTH 150
 
 class DebugLogger
 {
@@ -80,6 +81,7 @@ public:
 	int MicPin = 0;
 
 	int IncrementBrightnessPin = 12;
+	int AccPowerPin = 8;
 
 	//Unused currently
 	int DecrementPin = 3;
@@ -88,6 +90,9 @@ public:
 	{
 		pinMode(PwmPin, OUTPUT);
 		pinMode(MicPin, OUTPUT);
+
+		pinMode(AccPowerPin, OUTPUT);
+		digitalWrite(AccPowerPin, HIGH);
 
 		pinMode(IncrementBrightnessPin, INPUT);
 	}
@@ -99,7 +104,7 @@ class RunVariables
 	//For readability, centralized location for misc values
 public:
 	int lastAverageTime = 0;
-	int averageInterval = 25;
+	int averageInterval = 1;
 
 	float smoothedMicVal = 0;
 
@@ -109,8 +114,8 @@ public:
 	int rawMicVal = 0;
 	float light_mic_val = 0;
 
-	int smootherLength = 150;
-	float smootherArray[150];
+	int smootherLength = SMOOTHER_LENGTH;
+	float smootherArray[SMOOTHER_LENGTH];
 	int smootherIndex = 0;
 
 	float lastOutputTime = 0;
@@ -120,14 +125,14 @@ class RunConfig
 {
 public:
 	//For readability, centralized location for misc constants
-	int outputInterval = 100;//ms
+	int outputInterval = 1;//ms
 	int printInterval = 100;//ms
 
 };
 
 void collect(float* arr, int len, int* currentIndex, float val)
 {
-	//Really just cycles the array
+	//Really just cycles a circular array
 	arr[(*currentIndex)] = val;
 
 	(*currentIndex) += 1;
