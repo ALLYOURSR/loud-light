@@ -50,7 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\music_controller;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\libraries;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\libraries;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\music_controller;$(ProjectDir)..\..\..\..\program files (x86)\arduino\libraries;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.music_controller.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10807;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -81,7 +81,7 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="main.ino">
+    <None Include="music_controller.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
@@ -91,11 +91,18 @@
     <ClInclude Include="logger.h" />
     <ClInclude Include="math_.h" />
     <ClInclude Include="pins.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="run_vars.h" />
+    <ClInclude Include="smoother.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="__vm\.music_controller.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="buttons.cpp" />
     <ClCompile Include="constants.cpp" />
+    <ClCompile Include="logger.cpp" />
     <ClCompile Include="math_.cpp" />
+    <ClCompile Include="pins.cpp" />
+    <ClCompile Include="smoother.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>

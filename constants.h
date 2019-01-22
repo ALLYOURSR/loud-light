@@ -22,7 +22,7 @@ public:
 protected:
 	Constants()
 	{
-
+		//I feel like this arduino language doesn't quite support abstract classes. This should be one.
 	}
 };
 

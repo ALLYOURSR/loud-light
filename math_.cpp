@@ -1,34 +1,15 @@
-// 
-// 
-// 
-
 #include "math_.h"
 
 float correction(float rawValue)
-{
-<<<<<<< Updated upstream
-	//remaps 0-100 to a function on 0-255 to correct for perception of brightness
-=======
-	//remaps 0-100 to a function on 0-255
+{	//remaps 0-100 to a function on 0-255
 	//[0,255] corresponds to valid DigitalWrite PWM duty cycle value range
 	//The function is exponential to correct for human brightness perception
 	//Hint: for rawValue=0, returns 0. For rawValue = 100, returns 255
->>>>>>> Stashed changes
+
 	return exp(.055452*rawValue) - 1;
-
 }
 
-float getAverage(float* arr, int len)
-{
-	float sum = 0;
-	for (int i = 0; i < len; i++)
-	{
-		sum += arr[i];
 
-	}
-	//print(arr[6],0);
-	return sum / len;
-}
 
 float sample(int pin, int duration)
 {
@@ -89,7 +70,7 @@ int mapValue(int val, float min_, float max_, float newMin, float newMax)
 	return (val - min_)*(newMax-newMin) / (max_ - min_) + newMin;
 }
 
-void writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness)
+float writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness)
 {
 	//minBrightness and maxBrightness are the uncorrected brightness scale, start with 0, 100 and experiment
 	//minAmp and maxAmp are the current time window average amplitude range, adjusted to keep the light responsive.
@@ -101,15 +82,10 @@ void writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float 
 	//max brightness should be reduced to keep within range.
 	//A value of 40 for max brightness seems to work remarkably well for 12" lamps 
 	
-	float out = correction(mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness));
-	
-<<<<<<< Updated upstream
-=======
+	float normed = mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness);
 	float out = correction(normed);
-
->>>>>>> Stashed changes
 	analogWrite(pin, out);
-
+	return out;
 }
 
 float toVolts(int val)

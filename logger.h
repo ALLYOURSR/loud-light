@@ -1,5 +1,8 @@
 #pragma once
+#include <WString.h>
+#include <HardwareSerial.h>
 #define PRINT_BUFFER_LENGTH 4
+
 
 class DebugLogger
 {
@@ -17,55 +20,18 @@ private:
 	String printBuffer[PRINT_BUFFER_LENGTH];
 
 public:
-	DebugLogger(float printInterval, bool enabled = true)
-	{
-		Enabled = enabled;
-		PrintInterval = printInterval;
-	}
+	DebugLogger(float printInterval, bool enabled = true);
 
-	void Update(float currentTime)
-	{
-		if (currentTime - lastPrintTime >= PrintInterval)
-		{
-			flushPrintBuffer();
-			lastPrintTime = currentTime;
-		}
-	}
+	void Update(float currentTime);
 
-	void print(float val, int index)
-	{
-		printBuffer[index] = String(val);
-	}
+	void print(float val, int index);
 
-	void print(String val, int index)
-	{
-		printBuffer[index] = val;
-	}
+	void print(String val, int index);
 
-	void print(float val, String title, int index)
-	{
-		printBuffer[index] = title + ": " + String(val);
-	}
+	void print(float val, String title, int index);
 
-	void flushPrintBuffer()
-	{
-		if (Enabled)
-		{
-			String output = " -- ";
-			for (int i = 0; i < printBufferLength; i++)
-			{
-				output += printBuffer[i] + " -- ";
-			}
-			Serial.println(output);
-		}
-	}
+	void flushPrintBuffer();
 
-	void clear()
-	{
-		for (int i = 0; i < printBufferLength; i++)
-		{
-			printBuffer[i] = "";
-		}
-	}
+	void clear();
 
 };

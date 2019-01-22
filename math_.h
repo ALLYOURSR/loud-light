@@ -1,7 +1,4 @@
-// math_.h
-
-#ifndef _MATH__h
-#define _MATH__h
+#pragma once
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "Arduino.h"
@@ -11,8 +8,6 @@
 
 float correction(float rawValue);
 
-float getAverage(float* arr, int len);
-
 float readMicAmplitude(int pin);
 
 int mapValue(int val);
@@ -21,7 +16,7 @@ int mapValue(int val, float min_, float max_);
 
 int mapValue(int val, float min_, float max_, float newMin, float newMax);
 
-void writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness);
+float writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness);
 
 float toVolts(int val);
 
@@ -29,5 +24,4 @@ float toVolts(float val);
 
 float fromVolts(float val);
 
-#endif
 

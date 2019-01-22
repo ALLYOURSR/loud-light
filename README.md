@@ -3,13 +3,30 @@
 An Arduino powered pulse width modulation (PWM) light controller, for making lights flash with music (or any dynamic sound source) in real time. Amplitude driven, no FFT magic here.
 Turn any boring old party into a fantastic light show! You’ll be the talk of the neighborhood! Tested on LEDs and 12" cold cathode lamps, the latter of which produce a very interesting effect when hacked to work at less than 100% power. This is a highly technical solution, based primarily on gut feelings, guestimates, and hand waving. Enjoy!
 
+# Recruiters
+Hello. Your time is valuable. Here is a short summary of things you might be interested in seeing.
+
+| File | Description  |
+|---|---|
+| smoother.cpp |  Custom data structure (cyclical array) |
+|  constants.h |  Intuitive, useful usage of inheritance |
+|  smoother.cpp  |  Correct pointer usage with a destructor  |
+| All   |  Encapsulation, abstraction, and general OOP practices  | 
+| All   |  Clean, organized, relatively optimized, commented code |
+| All | Descriptive object names |
+* correct pointer usage with a destructor <smoother.cpp>
+* clean, organized, relatively optimized, commented code
+* Intuitive usage of inheritance <constants.h>
+* Encapsulation, abstraction, and general OOP practices
+* Custom data structures <smoother.cpp, a specialized cyclical array>
+
 Note on optimization: This code is written in a strongly object oriented fashion to prioritize readability and extensibility over performance. The same operation could be realized with fewer function calls and a smaller memory footprint.
 
 # Secret Formula
-Powering lights with an Arduino, even making them flash, is trivial. Adjusting brightness in real time, responsively, to music of varying tempo and volume, is not! Two main problems had to be solved.
+Powering lights with an Arduino, even making them flash, is trivial. Adjusting brightness in real time, responsively, to music of varying tempo and volume, is not! Three main problems had to be solved: amplitude normalization
 
-### Amplitude correction
-Music has non-uniform volume at various timescales - seconds, tens of seconds, minutes. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! Not to mention, without some form of automatic adjustment, the system wouldn't work without manually presetting a bias<sup>1</sup> to compensate for volume differences in different settings.
+### Amplitude normalization
+Music has non-uniform volume at various timescales - seconds, tens of seconds, minutes. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! Not to mention, without some form of automatic adjustment, the system wouldn't work without manually presetting a bias<sup>1</sup> to compensate for volume differences in different settings. I'm normalizing it to a scale which adjusts to volume in real time.
 
 To ensure a wide dynamic brightness range, we constantly normalize input volume according to a decaying volume envelope. To illustrate, assume microphone input varies in the range [0, 100]. Suppose that, during quiet parts of a song, only values between 0 and 25 might be measured. Without a correction, the light will never exceed 25% brightness until the song gets louder. So we instantiate a variable _currentMax = 0, and on every loop, we perform the following test:
 
@@ -22,7 +39,7 @@ Now that we have a value for the current maximum song volume (25), we can linear
 
 An astute reader may observe that there is no correction for the lower volume bound. Seems to work better without one.
 
-### Output Brightness Correction
+### Brightness-Perception Correction
 A naïve implementation (ask me how I know), adjusting pulse width linearly with mic voltage, causes lights to appear only to flash on and off, with very little range in between. I speculate that the human eye perceives light intensity logarithmically, much in the same way that human hearing is best measured on the logarithmic decibel scale. The solution: map the linear microphone voltage input to an inverse logarithmic function to linearize perception of LED brightness. Here's the relevent code from math_.cpp:
 
 ```c++
