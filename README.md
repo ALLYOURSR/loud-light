@@ -7,18 +7,14 @@ Turn any boring old party into a fantastic light show! You’ll be the talk of t
 Hello. Your time is valuable. Here is a short summary of things you might be interested in seeing.
 
 | File | Description  |
-|---|---|
-| smoother.cpp |  Custom data structure (cyclical array) |
+|:---:|:---:|
+| smoother.cpp |  Custom data structure (specialized cyclical array) |
 |  constants.h |  Intuitive, useful usage of inheritance |
 |  smoother.cpp  |  Correct pointer usage with a destructor  |
-| All   |  Encapsulation, abstraction, and general OOP practices  | 
-| All   |  Clean, organized, relatively optimized, commented code |
-| All | Descriptive object names |
-* correct pointer usage with a destructor <smoother.cpp>
-* clean, organized, relatively optimized, commented code
-* Intuitive usage of inheritance <constants.h>
-* Encapsulation, abstraction, and general OOP practices
-* Custom data structures <smoother.cpp, a specialized cyclical array>
+| logger.cpp | Custom debug tools |
+| All   | Encapsulation, abstraction, and general OOP practices  | 
+| All |  Clean, organized, relatively optimized, commented code |
+| All | Descriptive CamelCase naming |
 
 Note on optimization: This code is written in a strongly object oriented fashion to prioritize readability and extensibility over performance. The same operation could be realized with fewer function calls and a smaller memory footprint.
 
