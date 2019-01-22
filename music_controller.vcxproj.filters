@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="music_controller.ino" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="__vm\.music_controller.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,6 +27,12 @@
     <ClInclude Include="Buttons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math_.cpp">
@@ -41,5 +41,8 @@
     <ClCompile Include="constants.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.ino" />
   </ItemGroup>
 </Project>

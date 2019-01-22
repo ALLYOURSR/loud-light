@@ -81,16 +81,17 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="music_controller.ino">
+    <None Include="main.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buttons.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="math_.h" />
+    <ClInclude Include="pins.h" />
     <ClInclude Include="utils.h" />
-    <ClInclude Include="__vm\.music_controller.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="constants.cpp" />

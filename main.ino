@@ -2,6 +2,8 @@
 #include "constants.h"
 #include "utils.h"
 #include "Buttons.h"
+#include "pins.h"
+#include "logger.h"
 
 PinOrganizer pins = PinOrganizer();
 RunVariables runVars = RunVariables();
@@ -14,7 +16,6 @@ Constants c = VacuumLampConstants();
 ButtonManager bm = ButtonManager(pins, c, conf);
 
 int lastOutputTime = 0;
-float loopStart, loopEnd, loopTime;
 
 void setup() {
 	Serial.begin(74880);//Sets baud rate, enabling printing to computer when connected via USB
@@ -28,7 +29,7 @@ void setup() {
 }
 
 void loop() {
-	loopStart = micros();
+
 	runVars.maxMicVal -= c.minMaxDecay;
 
 	runVars.rawMicVal = abs(readMicAmplitude(pins.MicPin));
@@ -38,7 +39,6 @@ void loop() {
 
 	if (currentTime - runVars.lastAverageTime >= runVars.averageInterval)//Throttle to avoid lag. Not sure if this is necessary, but summing over a potentially large array might be relatively expensive for the little Arduino that could.
 	{
-		//This is the window calculation
 		bm.Update(currentTime);
 		runVars.smoothedMicVal = getAverage(runVars.smootherArray, runVars.smootherLength);
 		runVars.lastAverageTime = currentTime;
@@ -58,18 +58,7 @@ void loop() {
 		
 		runVars.lastOutputTime = currentTime;
 		lastOutputTime = currentTime;		
-
-		logger.print(digitalRead(pins.IncrementBrightnessPin), 2);
-
-		logger.print(loopTime / 1000.0, 0);//Profiling, to get a feel for the size of my time window, since I collect values every iteration
-		logger.print(c.maxBrightness, 1);
-	}
-	
-	logger.Update(currentTime);
-
-	loopEnd = micros();
-	loopTime = loopEnd - loopStart;
-	
-	
-	
+				
+	}	
+	logger.Update(currentTime);	
 }

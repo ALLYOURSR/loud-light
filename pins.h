@@ -8,7 +8,7 @@ public:
 	int MicPin = 0;
 
 	int IncrementBrightnessPin = 12;
-	int AccPowerPin = 8;
+	int ACCRefPin = 8;//Just an extra power source for button logic
 
 	//Unused currently
 	int DecrementPin = 3;
@@ -18,8 +18,8 @@ public:
 		pinMode(PwmPin, OUTPUT);
 		pinMode(MicPin, OUTPUT);
 
-		pinMode(AccPowerPin, OUTPUT);
-		digitalWrite(AccPowerPin, HIGH);
+		pinMode(ACCRefPin, OUTPUT);
+		digitalWrite(ACCRefPin, HIGH);
 
 		pinMode(IncrementBrightnessPin, INPUT);
 	}

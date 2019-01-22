@@ -6,7 +6,14 @@
 
 float correction(float rawValue)
 {
+<<<<<<< Updated upstream
 	//remaps 0-100 to a function on 0-255 to correct for perception of brightness
+=======
+	//remaps 0-100 to a function on 0-255
+	//[0,255] corresponds to valid DigitalWrite PWM duty cycle value range
+	//The function is exponential to correct for human brightness perception
+	//Hint: for rawValue=0, returns 0. For rawValue = 100, returns 255
+>>>>>>> Stashed changes
 	return exp(.055452*rawValue) - 1;
 
 }
@@ -96,6 +103,11 @@ void writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float 
 	
 	float out = correction(mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness));
 	
+<<<<<<< Updated upstream
+=======
+	float out = correction(normed);
+
+>>>>>>> Stashed changes
 	analogWrite(pin, out);
 
 }

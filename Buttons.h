@@ -9,18 +9,27 @@ public:
 	Constants* CurrentConstants;
 	RunConfig Config;//Arduino language won't compile if member name is a type name?
 	
-	ButtonManager(PinOrganizer pins, Constants constants, RunConfig runConfig)
+private:
+	float lastReadTime = 0;
+	float readInterval = 100;
+
+public:
+	ButtonManager(const PinOrganizer pins, Constants& constants, const RunConfig runConfig)
 	{
 		Pins = pins;
-		CurrentConstants = &constants;
+		CurrentConstants = &constants;//Side effects, I know, but this is a toy arduino example in pseudo cpp so I'm going with it
 		Config = runConfig;		
 	}	
 
 	void Update(float currentTime)
 	{
-		if (digitalRead(Pins.IncrementBrightnessPin) == HIGH)
+		if (currentTime - lastReadTime >= readInterval)
 		{
-			CurrentConstants->maxBrightness = int(CurrentConstants->maxBrightness + 10) % 100;
+			if (digitalRead(Pins.IncrementBrightnessPin) == LOW)//The cheapo switchboard I'm using opens the circuit on press, you may need to switch to LOW for your application
+			{
+				CurrentConstants->maxBrightness = int(CurrentConstants->maxBrightness + 1) % 100;
+			}
+			lastReadTime = currentTime;
 		}
 	}
 
