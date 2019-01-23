@@ -1,5 +1,8 @@
 #pragma once
+#include <math.h>
+#include "math_.h"
 
+//Pretend this class is abstract. Not supported in this arduino c++
 class Constants
 {
 public:
@@ -22,18 +25,31 @@ public:
 protected:
 	Constants()
 	{
-		//I feel like this arduino language doesn't quite support abstract classes. This should be one.
+
 	}
+	virtual float Correction(float rawValue)
+	{
+		//This shouldn't need a definition with a proper abstract class, but the compiler complains.
+		//Putting this here allows convenient adjustment for different brightness output curves
+		Serial.println(rawValue);
+	}
+
+public:
+	float WriteToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness);
 };
 
 class VacuumLampConstants : public Constants
 {
 public:
 	VacuumLampConstants();
+
+	float Correction(float rawValue);
 };
 
 class LEDConstants : public Constants
 {
 public:
 	LEDConstants();
+
+	float Correction(float rawValue);
 };

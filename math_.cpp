@@ -70,23 +70,6 @@ int mapValue(int val, float min_, float max_, float newMin, float newMax)
 	return (val - min_)*(newMax-newMin) / (max_ - min_) + newMin;
 }
 
-float writeToLight(int pin, float rawPinValue, float minAmp, float maxAmp, float minBrightness, float maxBrightness)
-{
-	//minBrightness and maxBrightness are the uncorrected brightness scale, start with 0, 100 and experiment
-	//minAmp and maxAmp are the current time window average amplitude range, adjusted to keep the light responsive.
-	
-	//For LED:
-	//0-100 seem to work
-	
-	//For the vac-lamp,
-	//max brightness should be reduced to keep within range.
-	//A value of 40 for max brightness seems to work remarkably well for 12" lamps 
-	
-	float normed = mapValue(rawPinValue, minAmp, maxAmp, minBrightness, maxBrightness);
-	float out = correction(normed);
-	analogWrite(pin, out);
-	return out;
-}
 
 float toVolts(int val)
 {

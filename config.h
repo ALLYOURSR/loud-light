@@ -4,6 +4,8 @@ constexpr int PRINT_INTERVAL = 100;
 constexpr int SMOOTHER_LENGTH = 150;
 constexpr int BUTTON_READ_INTERVAL = 100;
 
+constexpr int LIGHT_TYPE = 0;//0 for LED, 1 for Vacuum lamp
+
 
 //In other applications, I'll typically create config classes, like the one below.
 //This way I can still keep all the config in one place, while using inheritance to create specialized configs 

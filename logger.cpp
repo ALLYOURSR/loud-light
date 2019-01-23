@@ -1,6 +1,5 @@
 #include "logger.h"
 #pragma once
-#define PRINT_BUFFER_LENGTH 4
 
 
 
@@ -16,6 +15,8 @@ void DebugLogger::Update(float currentTime)
 	{
 		flushPrintBuffer();
 		lastPrintTime = currentTime;
+
+		Serial.println("printing");
 	}
 }
 
