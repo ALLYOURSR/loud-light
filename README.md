@@ -7,7 +7,7 @@ Turn any boring old party into a fantastic light show! You’ll be the talk of t
 Hello. Your time is valuable. Here is a short summary of things you might be interested in seeing.
 
 | File | Description  |
-|:---:|:---:|
+|---|---|
 | smoother.cpp |  Custom data structure (specialized cyclical array) |
 |  constants.h |  Intuitive, useful usage of inheritance |
 |  smoother.cpp  |  Correct pointer usage (new, delete[]) with a destructor  |
@@ -63,8 +63,10 @@ float LEDConstants::Correction(float rawValue)
 
 As for the oddly specific value of .055452, in addition to the non-linear correction, this function maps an input range of [0, 100] to [0, 255]. I chose [0,100] as the input range to make adjustments more intuitive to reason about, and the analogWrite function takes a single byte as input to control pulse width from 0 to 255. The result works quite well with the parameters in the code!
 
-###Output Smoothing
-The ATMEGA328P microcontroller at the heart of the Arduino Uno runs at 20 Million Instructions Per Second (MIPS). Now, I haven't attempted to calculate the number of instructions this code executes per loop, but if we assume, say, 5000, that means the microphone value is read something like 4000 times per second. These sample times do not necessarily line up meaningfully with the music, and so directly adjusting output PWM on every loop iteration tends to make the lights flash somewhat erratically. The solution here is quite simple: I maintain a cyclical array which is updated on every loop and stores past sample values. On output, I average this array (which empirically works out to a sample window of tens of ms for a length of 150), and the result is that the light intensity tends to change more gradually with time, so that I 'm less likely to be sued for releasing this without a seizure warning. This solution is biased towards the past, and if the array length (or smoothing window width) is too large, this may induce a sort of lag effect, but it doesn't seem to be noticible for array lengths < 150. Alternative solutions could use FFT, or a derivative based calculation, for a less past-biased smoothed output. See smoother.cpp for implementation details, and some fancy pointer-fu. 
+### Output Smoothing
+The ATMEGA328P microcontroller at the heart of the Arduino Uno runs at 20 Million Instructions Per Second (MIPS). Now, I haven't attempted to calculate the number of instructions this code executes per loop, but if we assume, say, 5000, that means the microphone value is read something like 4000 times per second. These sample times do not necessarily line up meaningfully with the music, and so directly adjusting output PWM on every loop iteration tends to make the lights flash somewhat erratically. 
+
+The solution here is quite simple: I maintain a cyclical array which is updated on every loop and stores past sample values. On output, I average this array (which empirically works out to a sample window of tens of ms for a length of 150), and the result is that the light intensity tends to change more gradually with time, so that I 'm less likely to be sued for releasing this without a seizure warning. This solution is biased towards the past, and if the array length (i.e. smoothing window width) is too large, this may induce a sort of lag effect, but it doesn't seem to be noticible for array lengths < 150. Alternative solutions could use FFT, or a derivative based calculation, for a less past-biased smoothed output. See smoother.cpp for implementation details, and some fancy pointer-fu. 
 
 Note: this may only be a problem because I adjust output PWM periodically on the order of tens of ms, a relic from legacy code. I'll have to test to see if smoothing is necessary if I remove the output throttling.
 
