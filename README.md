@@ -34,7 +34,7 @@ To ensure a wide dynamic brightness range, we constantly normalize input volume 
 
 ```c++
 if (runVars.smoothedMicVal > runVars.maxMicVal)
-			runVars.maxMicVal = runVars.smoothedMicVal;
+	runVars.maxMicVal = runVars.smoothedMicVal;
 ```
 
 Now that we have a value for the current maximum song volume (25), we can linearly map micVal to the range [0, maxMicVal]. The result is a fuller dynamic brightness range, as the quiet part of the song now outputs brightness from 0-100%, instead of just 0-25% without the correction. Now, let's say we've gone from a loud, emotional chorus with maxMicVal == 90, back to a quiet verse with maximum micVal == 25. Without a correction, our current input range of [0, 25] mapped to [0, 90] will output very dim lights, detracting from the performance. There's a catch here: to get an accurate upper volume bound, we have to have some way of predicting the future. Fortunately, the science of watching flashing lights is imprecise, and we can take advantage of a little slop by simply decreasing maxMicVal by a set decay value on every loop:
@@ -50,7 +50,7 @@ The astute reader will observe that there is no correction for the lower volume 
 ### Brightness Perception Correction
 A naïve implementation (ask me how I know), adjusting pulse width linearly with mic voltage, causes lights to appear only to flash on and off, with very little dimming in between. I speculate that the human eye perceives light intensity logarithmically<sup>2</sup>, much in the same way that the human ear response (in less technical terms, hearing) is best measured on the logarithmic decibel scale. The solution: map the linear microphone voltage input to an inverse logarithmic function to linearize perception of LED brightness. Essentially what we're doing (warning, math ahead) is composing two functions f(g(x)) (figure below), where  f(x) is is the response of the human eye (hey, that's bright!), and g(x) is the correction curve. 
 
-![](docs/super_informative_plot.png)
+<img align="center" src="docs/super_informative_plot.png">
 
 If our assumptions about perception are correct, and g(x) is close enough to the true inverse of f(x), the result is a mostly linear perception of LED brightness, and a fuller apparent dynamic range. Here's the relevent code from constants.cpp:
 
@@ -69,8 +69,9 @@ The ATMEGA328P microcontroller at the heart of the Arduino Uno runs at 20 Millio
 Note: this may only be a problem because I adjust output PWM periodically on the order of tens of ms, a relic from legacy code. I'll have to test to see if smoothing is necessary if I remove the output throttling.
 
 # Hardware
-![](docs/hardware.png)
-![](docs/pro_schematic.png)
+<img align="center" src="docs/hardware.png">
+<img align="center" src="docs/pro_schematic.png">
+
 * Arduino Uno: This part isn’t terribly important, this code should work just fine with any Arduino variant/clone
 * Amplified Microphone Board: My advice is to get a board with instructions. Mine was random chineseium and I had to figure it out by trial and error mostly. Your mic sensitivity will probably affect light response, so you may need to tweak your variables.
 * Power Transistor: I used a TIP122 NPN darlington transistor. Probably overkill at 65 watt capacity, but cheap and available.
