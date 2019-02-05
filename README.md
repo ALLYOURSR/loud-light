@@ -6,7 +6,9 @@ Turn any boring old party into a fantastic light show! You’ll be the talk of t
 <img align="center" src="docs/lights.png">
 
 [Cold Cathode in Action](https://vimeo.com/315538625)
+
 [LED Demo](https://vimeo.com/315539303)
+
 [Cold Cathode Slowmo](https://vimeo.com/315539108)
 
 # Recruiters
