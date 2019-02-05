@@ -19,9 +19,9 @@ void setup() {
 	Serial.begin(74880);//Sets baud rate, enabling printing to computer when connected via USB	
 
 	if (LIGHT_TYPE == 0)
-		c = &LEDConstants();
+		c = new LEDConstants();
 	else
-		c = &VacuumLampConstants();
+		c = new VacuumLampConstants();
 		
 	ButtonManager bm = ButtonManager(pins, *c);
 	logger.print("Hello", 0);
