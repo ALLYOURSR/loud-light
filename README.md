@@ -14,18 +14,16 @@ Hello. Your time is valuable. Here is a short summary of things you might be int
 | logger.cpp | Custom debug tools |
 | All   | Encapsulation, abstraction, and general OOP practices  | 
 | All |  Clean, organized, relatively optimized, commented code |
-| All | Descriptive CamelCase naming |
+| All | Descriptive class, method, and instance naming |
 
 Note on optimization: Though embedded, this code is written in a strongly object oriented fashion to prioritize readability and extensibility over performance. The same operation could be realized with fewer function calls and a smaller memory footprint.
 
 # Secret Formula
 Powering lights with an Arduino, even making them flash, is trivial. Adjusting brightness in real time, responsively, to music of varying tempo and volume, is not! Three main problems had to be solved: 
 
-| Solution | Purpose |
-|---|---|
-|Amplitude Normalization|Keep lights responsive at any volume|
-|Brightness Perception Correction|Ensure full dimming range|
-|Output Smoothing| Keep lights from flashing erratically|
+* Amplitude Normalization: keep lights responsive at any volume
+* Brightness Perception Correction: ensure full dimming range
+* Output Smoothing: prevent lights from flashing erratically
 
 ### Amplitude normalization
 Music has non-uniform volume at various timescales - seconds, tens of seconds, minutes. And if you don’t take this into account, you’ll likely end up with lights that stay solidly on during loud parts and solidly off during quiet parts – not very exciting! Not to mention, without some form of automatic adjustment, the system wouldn't work without manually presetting a bias<sup>1</sup> to compensate for volume differences in different settings.
