@@ -1,7 +1,7 @@
 
 # Overview
 An Arduino powered pulse width modulation (PWM) light controller, for making lights flash with music (or any dynamic sound source) in real time. Amplitude driven, no FFT magic here.
-Turn any boring old party into a fantastic light show! You’ll be the talk of the neighborhood! Tested on LEDs and 12" cold cathode lamps, the latter of which produce a very interesting effect when hacked to work at less than 100% power. This is a highly technical solution, based primarily on gut feelings, guestimates, and hand waving. Enjoy!
+Turn any boring old party into a fantastic light show! You’ll be the talk of the neighborhood! Tested on LEDs and 12" cold cathode lamps, the latter of which produce a very interesting effect when hacked to work at less than 100% power. This is a highly technical solution, based primarily on gut feelings, guestimates, and hand waving, hacked together over a weekend. Enjoy!
 
 <img align="center" src="docs/giff.gif">
 
