@@ -93,8 +93,8 @@ I am a lowly geophysicist, not an electrical engineer. If my spherical cow burns
 MIT license. If you liked this code and the writeup, donations for "beer" are always welcome. (BTC: 1HTA8C2yp5DvBrm6b3daSU5WktEG1YNqCY)
 
 # Footnotes
-1. One potential solution is a good Automatic Gain Control(AGC) microphone, however the mic I used had AGC and didn't perform well enough without the discussed algorithmic adjustments. AGC is not without its own paramaters which have limited or no adjustability with most cheap mics on the market.
+1. One potential solution is a good Automatic Gain Control(AGC) microphone, however the mic I used had AGC and didn't perform well enough without the discussed algorithmic adjustments. AGC is not without its own parameters which have limited or no adjustability with most cheap mics on the market.
 
-2. I didn't try hard, but I couldn't find a source for this. Since this isn't academia, and the code works, we'll just go with it.
+2. I didn't try hard, but I couldn't find a source for this. Since I'm not writing for academia, and the code works, we'll just go with it.
 
 Other Note: The microphone analogRead() values seem to change depending on whether I use usb or 12v to power the board. The constants I use are optimized for 12v power, they don't work so well with usb.
